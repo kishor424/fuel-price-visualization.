@@ -1,27 +1,34 @@
-// src/components/Dropdown.tsx
 
-import React from "react";
 
-interface DropdownProps {
+interface DropdownProps<T> {
   label: string;
-  options: string[];
-  value: string;
-  onChange: (value: string) => void;
+  options: T[];
+  value: T;
+  onChange: (value: T) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ label, options, value, onChange }) => {
+function Dropdown<T>({ label, options, value, onChange }: DropdownProps<T>) {
   return (
     <div style={{ marginBottom: "1rem" }}>
       <label>
         {label}:
-        <select value={value} onChange={e => onChange(e.target.value)} style={{ marginLeft: "0.5rem" }}>
+        <select
+          value={value as unknown as string}
+          onChange={e => {
+            // Convert the selected value back to T
+            onChange(e.target.value as unknown as T);
+          }}
+          style={{ marginLeft: "0.5rem" }}
+        >
           {options.map(opt => (
-            <option key={opt} value={opt}>{opt}</option>
+            <option key={opt as unknown as string} value={opt as unknown as string}>
+              {opt as unknown as string}
+            </option>
           ))}
         </select>
       </label>
     </div>
   );
-};
+}
 
 export default Dropdown;

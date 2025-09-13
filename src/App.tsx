@@ -18,9 +18,27 @@ const App: React.FC = () => {
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto", padding: "1rem" }}>
       <h2>Retail Fuel Price Visualization</h2>
-      <Dropdown label="City" options={cities} value={selectedCity} onChange={setSelectedCity} />
-      <Dropdown label="Fuel Type" options={fuels} value={selectedFuel} onChange={setSelectedFuel} />
-      <Dropdown label="Year" options={years} value={selectedYear} onChange={setSelectedYear} />
+     <Dropdown<MetroCity>
+  label="City"
+  options={cities}
+  value={selectedCity}
+  onChange={setSelectedCity}
+/>
+
+<Dropdown<FuelType>
+  label="Fuel Type"
+  options={fuels}
+  value={selectedFuel}
+  onChange={setSelectedFuel}
+/>
+
+<Dropdown<Year>
+  label="Year"
+  options={years}
+  value={selectedYear}
+  onChange={setSelectedYear}
+/>
+
       <Chart data={monthlyData} />
     </div>
   );
